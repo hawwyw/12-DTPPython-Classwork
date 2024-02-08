@@ -17,8 +17,15 @@ if func == 1:
         grade = int(input("grade: "))
         students[new_student].append(grade)
         print(students[new_student])
-        int(input("Do you want to enter another grade for a student: Enter 1 for yes"))
+        go = int(input("Do you want to enter another grade for a student: Enter 1 for yes or 2 for no: "))
 
-for i in range (len(students)):
-    students[i] = int(input(f"What grade did  {names[i]} get? : "))
-    i += 11
+elif func == 2:
+    student_avg = int(input(f"Which student do you wish to find the average grade for?\n{names}\nEnter 0 for first and up one each one along: "))
+    name = names[student_avg]
+    avg = sum(students[student_avg]) / len(students[student_avg])
+    print(f"The average grade for {name} is {avg}.")
+    
+else: 
+    student_highlow = int(input(f"Which student do you wish to find the highest and lowest grade for?\n{names}\nEnter 0 for first and up one each one along: "))
+    name = names[student_highlow]
+    print(list.sort(names[student_highlow]))
