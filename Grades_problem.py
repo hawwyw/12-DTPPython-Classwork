@@ -12,7 +12,7 @@ func = 1
 
 while func != 4:
 
-    func = int(input("Do you wish to: \nEnter new grades(enter 1)\nFind a students average grade(enter 2)\nFind the highest and lowest grades?(enter 3)\nExit the program?(enter 4)"))
+    func = int(input("Do you wish to: \nEnter new grades(enter 1)\nFind a students average grade(enter 2)\nFind the highest and lowest grades?(enter 3)\nExit the program?(enter 4)\nEnter here : "))
 
     if func == 1:
         new_student = int(input(f"Which student do you wish to enter a new grade for?\n{names}\nEnter 0 for first and up one each one along: "))
