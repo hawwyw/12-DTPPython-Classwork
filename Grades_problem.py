@@ -10,7 +10,7 @@ print(students[0][1])
 names = ["bob", "jos", "harry", "ben"]
 func = 1
 
-while func != 4:
+while func < 4:
 
     func = int(input("Do you wish to: \nEnter new grades(enter 1)\nFind a students average grade(enter 2)\nFind the highest and lowest grades?(enter 3)\nExit the program?(enter 4)\nEnter here : "))
 
