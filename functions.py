@@ -47,3 +47,4 @@ elif func == 5:
             if len(string_list[i]) > 3:
                 new_list.append(string_list[i])
         return new_list
+
