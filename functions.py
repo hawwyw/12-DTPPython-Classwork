@@ -42,9 +42,48 @@ elif func == 4:
     print(same)
 
 elif func == 5:
-    def long_strings(string_list):
-        for i in range(string_list):
-            if len(string_list[i]) > 3:
-                new_list.append(string_list[i])
+    def long_strings(new_string_list):
+        new_list = []
+        for i in range(len(new_string_list)):
+            if len(new_string_list[i]) > 3:
+                new_list.append(new_string_list[i])
         return new_list
 
+    string_list = ["ABHCASD", "ASDADA", "ad", "aa"]
+    string_list = str(input("Enter Here: "))
+    new_string_list = string_list.split(" ")
+    print(string_list)
+    new_list = long_strings(new_string_list)
+    print(new_list)
+
+elif func == 6:
+    def odd_or_even(odd_or_even_number):
+        if odd_or_even_number % 2 == 0:
+            odd_even = "Even"
+        else:
+            odd_even = "Odd"
+        return odd_even
+    
+    odd_or_even_number = int(input("Enter a number: "))
+    odd_even = odd_or_even(odd_or_even_number)
+    print(odd_even)
+
+else:
+    def common_numbers(list_1, list_2):
+        list_lists = [list_1, list_2]
+        list_lists2 = [list_2, list_1]
+        list_c = []
+        x = 0
+        i = 0
+        a = 0
+        for a in range(0, 2):
+            for letter in list_lists[x]:
+                if list_lists[x][i] in list_lists2[x]:
+                    list_c.append(list_lists[x][i])
+                i += 1
+            x += 1
+            a += 1
+            i = 0
+        return list_c
+        
+    list_c = common_numbers(list_1, list_2)
