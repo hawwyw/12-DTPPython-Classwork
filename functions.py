@@ -42,18 +42,17 @@ elif func == 4:
     print(same)
 
 elif func == 5:
-    def long_strings(new_string_list):
+    def long_strings(string_list):
         new_list = []
+        new_string_list = string_list.split(" ")
         for i in range(len(new_string_list)):
             if len(new_string_list[i]) > 3:
                 new_list.append(new_string_list[i])
         return new_list
 
-    string_list = ["ABHCASD", "ASDADA", "ad", "aa"]
     string_list = str(input("Enter Here: "))
-    new_string_list = string_list.split(" ")
-    print(string_list)
-    new_list = long_strings(new_string_list)
+    
+    new_list = long_strings(string_list)
     print(new_list)
 
 elif func == 6:
