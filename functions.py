@@ -76,14 +76,17 @@ else:
         x = 0
         i = 0
         a = 0
-        for a in range(0, 2):
-            for letter in list_lists[x]:
-                if list_lists[x][i] in list_lists2[x]:
-                    list_c.append(list_lists[x][i])
-                i += 1
-            x += 1
-            a += 1
-            i = 0
+        for letter in list_lists[x]:
+            if list_lists[x][i] in list_lists2[x]:
+                list_c.append(list_lists[x][i])
+            i += 1
+        x += 1
+        a += 1
+        i = 0
         return list_c
-        
+    
+    list_1 = str(input("HERE"))
+    list_2 = str(input("HERE")) 
+
     list_c = common_numbers(list_1, list_2)
+    print(list_c)
