@@ -1,13 +1,13 @@
 run = True
 while run == True:
     try:
-        mark = int(input('uryaudgaispdada[dpahvhh'))
+        mark = int(input('mark'))
     except:
-        print("NAH AH,ENTER A VALID INTEGER :(((((((")
+        print("number please")
     else:  
         run = False
         if mark == 1:
-            print("GOOD WORK MAN")
+            print("yes")
         else:
-            print("UR BAD")
+            print("no")
     
