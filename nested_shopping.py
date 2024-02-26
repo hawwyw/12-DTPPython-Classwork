@@ -1,31 +1,32 @@
 shopping_list = {
-    "Bannana": 5,
-    "Watermelon": 6,
-    "Apple": 5
+    "Bannana": {"price": 5, "quantity": 5},
+    "Watermelon": {"price": 9, "quantity": 2},
+    "Apple": {"price": 5, "quantity": 4}
 }
 func = 1
 go = True
 
-def adding(shopping_list, item, price):
+def adding(shopping_list, item, price, quantity):
     if item in shopping_list:
         sure = input(f"Item is already in list. Are you sure you want to change the value of {item}. Enter 'Yes' for yes and anything else for no")
         if sure == "Yes":
-            shopping_list [item] = price
-            print("Price changed")
+            shopping_list[item] = {"price": price, "quantity": quantity}
         else:
-            print("Price not changed")
+            print("Nothing changed")
     else:
-        shopping_list [item] = price
-        print("Item added")
+        shopping_list[item] = {"price": price, "quantity": quantity}
+    print(shopping_list)
     return shopping_list
 
 def price_check(shopping_list):
-    total = sum(shopping_list.values())
+    total = 0
+    for item in shopping_list:
+        total += shopping_list[item]["price"] * shopping_list[item]["quantity"] 
     print(f"The price is {total}")
 
 def item_price(shopping_list, item):
     if item in shopping_list:
-        print(f"The price of {item} is {shopping_list[item]}")
+        print(f"The price of {item} is ${shopping_list[item]['price']} and you have {shopping_list[item]['quantity']} of them for a total of ${shopping_list[item]['price'] * shopping_list[item]['quantity']}.")
     else:
         sure = input("This item is not in your list. Do you want to add it instead? Enter 'Yes' if you do and anything else if you don't: ")
         if sure == "Yes":
@@ -37,11 +38,18 @@ def item_price(shopping_list, item):
                 except:
                     go = True
                     print("Enter a real number")
-            
-            shopping_list[item] = price
+            go = True
+            while go:
+                try:
+                    go = False
+                    quantity = int(input("Enter the quantity of the item: "))
+                except:
+                    go = True
+                    print("Enter a real number")
+            shopping_list[item] = {"price": price, "quantity": quantity}
             print("Item added")
         else:
-            print("Item not added")
+            print("Nothing changed")
     return shopping_list
 
 def remove (shopping_list, item):
@@ -60,14 +68,23 @@ while func != 5:
             print("Enter a number between 1 and 5")
     if func == 1:
         item = str(input("Enter the name of the item you wish to add (caps sensitive): "))
+        go =  True
         while go:
             try:
-                price = float(input("Enter the price of the item: "))
                 go = False
+                price = float(input("Enter the price of the item without the dollar sign: "))
             except:
                 go = True
                 print("Enter a real number")
-        shopping_list = adding(shopping_list, item, price)
+        go = True
+        while go:
+            try:
+                go = False
+                quantity = int(input("Enter the quantity of the item: "))
+            except:
+                go = True
+                print("Enter a real number")
+        shopping_list = adding(shopping_list, item, price, quantity)
 
     elif func == 2:
         price_check(shopping_list)
@@ -84,4 +101,3 @@ while func != 5:
             print("Item is not in list")
 
 print("Thank you!")
-
