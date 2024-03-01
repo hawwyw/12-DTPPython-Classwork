@@ -6,20 +6,12 @@ shopping_list = {
     "apple": {"price": 5, "quantity": 4}
 }
 
-func = "a"
+func = "place holder"
 go = True
 
 def adding (shopping_list, item, price, quantity):
-    if item in list:
-        sure = buttonbox("Item in list. Are you sure you wish to change price and quantity?", "Are you sure?", choices = ("Yes", "No"))
-        if sure == "Yes":
-            shopping_list[item] = {"price": price, "quantity": quantity}
-            msgbox("Item price and quantity updated successfully!")
-        else:
-            msgbox("Price and quantity not updated")
-    else:
-        shopping_list[item] = {"price": price, "quantity": quantity}
-        msgbox("Item added")
+    shopping_list[item] = {"price": price, "quantity": quantity}
+    msgbox("Item added")
     return shopping_list
 
 def main_menu():
@@ -29,11 +21,15 @@ def main_menu():
 def total_price(shopping_list):
     total = 0
     for item in shopping_list:
-        total += shopping_list[item]["price"] * shopping_list[item]["quantity"] 
+        item_price = shopping_list[item]["price"]
+        item_quantity = shopping_list[item]["quantity"]
+        total += item_quantity * item_price
     msgbox(f"The total price is ${total}")
 
 def item_price(shopping_list, item):
-    msgbox(f"The price of each {item} is ${shopping_list[item]['price']} and you have {shopping_list[item]['quantity']} of them for a total of ${shopping_list[item]['price'] * shopping_list[item]['quantity']}.", "Price Inquiry")
+    item_price = shopping_list[item]['price'] 
+    item_quantity = shopping_list[item]['quantity']
+    msgbox(f"The price of each {item} is ${shopping_list[item]['price']} and you have {shopping_list[item]['quantity']} of them for a total of ${item_price * item_quantity}.", "Price Inquiry")
 
 def remove(shopping_list, item):
     shopping_list.pop(item)
@@ -57,7 +53,7 @@ while True:
             except:
                 go = True
                 msgbox("Enter a valid number", "Enter a number")
-        quantity = enterbox("How many items do you wish to add?", "Quantity")
+        quantity = integerbox("How many items do you wish to add?", "Quantity")
 
         shopping_list = adding(shopping_list, item, price, quantity)
     
