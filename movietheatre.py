@@ -38,7 +38,14 @@ def leave():
     return None
 
 def print_dict():
-    pass
+    out_string = ""
+    for key in movies:
+        print(key)
+        temp = f"{key}: Genre : {movies[key]['Genre']}, Duration : {movies[key]['Duration']}, Showtime : {movies[key]['Showtime']}, Tickets sold : {movies[key]['Tickets sold']}\n"
+
+        out_string += temp
+    
+    msgbox(out_string)
 
 def search():
     choices = []
@@ -46,13 +53,12 @@ def search():
         choices.append(i)
     selection = choicebox("Select a movie to see details: ", "Search Movies", choices)
     
-    for key, value in movies.items():
-        genre = "Genre : " + str(value['Genre'])
-        duration = "Duration : " + str(value['Duration'])
-        showtime = "Showtime : " + str(value['Showtime'])
-        tickets_sold = "Tickets sold (150 max) : " + str(value['Tickets sold'])
+    genre = movies[selection]['Genre']
+    duration = movies[selection]['Duration']
+    showtime = movies[selection]['Showtime']
+    tickets_sold = movies[selection]['Tickets sold']
 
-    msg = (genre, "\n", duration, "\n", showtime, "\n", tickets_sold)
+    msg = ("Genre : ", genre, "\n", "Duration : ", duration, "\n", "Showtime : ", showtime, "\n", "Tickets sold : ", tickets_sold)
 
     msgbox(msg, "Search Movies")
 
