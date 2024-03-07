@@ -63,10 +63,20 @@ def search():
     msgbox(msg, "Search Movies")
 
 def add_movies():
-    pass
-
-def check_exists():
-    pass
+    movie = enterbox("What movie do you want to add? : ")
+    if movie in movies:
+        sure = choicebox("Movie already being shown - do you want to change details?", "Movie Theatre", choices = ("Yes", "No"))
+        if sure == "Yes":
+            edit()
+        else:
+            msgbox("No details changed.")
+    else:
+        msg = "Please fill out movie details below: "
+        title = "Movie Theatre"
+        field_names = ["Genre : ", "Duration : ", "Showtime : ", "Tickets sold : "]
+        field_values = []
+        field_values = multenterbox(msg,title, field_names)
+        
 
 def edit():
     pass
