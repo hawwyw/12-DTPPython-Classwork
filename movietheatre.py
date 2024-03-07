@@ -32,7 +32,7 @@ def menu():
 
         get_input = options[selection]()
 
-
+ 
 
 def leave():
     return None
@@ -76,7 +76,7 @@ def add_movies():
         field_names = ["Genre : ", "Duration : ", "Showtime : ", "Tickets sold : "]
         field_values = []
         field_values = multenterbox(msg,title, field_names)
-        
+
 
 def edit():
     pass
