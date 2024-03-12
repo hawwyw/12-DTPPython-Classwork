@@ -117,6 +117,33 @@ def add_movies():
 
         print_dict()
         return True
+    movie = enterbox("What movie do you want to add? : ")
+    if movie in movies:
+        sure = buttonbox("Movie already being shown - do you want to change details?", "Movie Theatre", choices = ("Yes", "No"))
+        if sure == "No":
+            return True
+    msg = "Please fill out movie details below: "
+    title = "Movie Theatre"
+    field_names = ["Genre : ", "Duration(minutes) : ", "Showtime : ", "Tickets sold : "]
+    answer = []
+    run = True
+    while run:
+        answer = multenterbox(msg,title, field_names)
+        run = False
+        if not answer[3].isdigit() or not answer[2].isdigit() or not answer[1].isdigit():
+            msgbox("Enter an integer for duration, showtime and tickets sold - use 24 hour time eg 700 for 7am or 1300 for 1 PM")
+            run = True
+        elif int(answer[2]) > 2400 or int(answer[2]) < 0:
+            msgbox("Enter a number between 0 and 2400.")
+            run = True
+        elif int(answer[3]) > 150:
+            msgbox("Max tickets is 150")
+            run = True
+    temp = {"Genre": answer[0], "Duration": answer[1], "Showtime": answer[2], "Tickets sold": answer[3]}
+    movies[movie] = temp
+    return True
+
+
 
 def edit():
     movie = choicebox("What movie do you wish to edit?", "Edit details", movies)
@@ -149,5 +176,5 @@ def edit():
             movies[movie][change] = temp
             
 
-# Main Menu
+# Main program
 menu()
