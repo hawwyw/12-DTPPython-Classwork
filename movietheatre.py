@@ -86,42 +86,42 @@ def add_movies():
                 user_in = []
                 running = True
 
-            if "" in user_in:
+            elif "" in user_in:
                 msgbox("Enter something", "Error")
                 user_in = []
                 running = True
             
-            if not user_in[3].isdigit() or not user_in[2].isdigit() or not user_in[1].isdigit():
+            elif not user_in[3].isdigit() or not user_in[2].isdigit() or not user_in[1].isdigit():
                 msgbox("Enter number for 2, 3, 4", "Error")
                 user_in = []
                 running = True
 
-            if int(user_in[3]) > 150 or int(user_in[3]) < 0:
+            elif int(user_in[3]) > 150 or int(user_in[3]) < 0:
                 msgbox("Enter number between 0 and 150 for tickets sold", "Error")
                 user_in = []
                 running = True
 
-            if int(user_in[1]) <= 0:
+            elif int(user_in[1]) <= 0:
                 msgbox("Enter a time above 0 for tickets sold", "Error")
                 user_in = []
                 running = True
             
-            if int(user_in[2]) > 2400 or int(user_in[2]) < 0:
+            elif int(user_in[2]) > 2400 or int(user_in[2]) < 0:
                 msgbox("Enter number between 0 and 2400 for time", "Error")
                 user_in = []
                 running = True
 
 
-            temp = {
+        temp = {
                 "Genre": user_in[0],
                 "Duration": int(user_in[1]),
                 "Showtime": int(user_in[2]),
                 "Tickets sold": int(user_in[3])
             }
 
-            movies[movie] = temp
+        movies[movie] = temp
 
-            print_dict()
+        print_dict()
         return True
 
 
