@@ -84,8 +84,10 @@ def add_movies():
         elif int(answer[3]) > 150:
             msgbox("Max tickets is 150")
             run = True
-    temp = {"Genre": answer[0], "Duration": answer[1], "Showtime": answer[2], "Tickets sold": answer[3]}
-    movies[movie] = temp
+        else:
+            temp = {"Genre": answer[0], "Duration": answer[1], "Showtime": answer[2], "Tickets sold": answer[3]}
+            movies[movie] = temp
+            
     return True
 
 
