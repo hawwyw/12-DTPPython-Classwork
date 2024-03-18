@@ -14,8 +14,9 @@ def menu():
         "Find movie showing": search,
         "Update": edit,
         "List movies": print_dict,
-        "Add movies": add_movies,
-        "Exit": leave
+        "Change Tickets Sold": tickets_sold,
+        "Exit": leave,
+        None: leave
     }
 
     get_input = True
@@ -27,46 +28,52 @@ def menu():
         choices = []
         for i in options:
             choices.append(i)
+        choices.remove(i)
         
         selection = buttonbox(msg, title, choices)
 
         get_input = options[selection]()
 
-
 def leave():
     return None
 
 def print_dict():
-    out_string = ""
-    for key in movies:
-        print(key)
-        temp = f"{key}: Genre : {movies[key]['Genre']}, Duration : {movies[key]['Duration']}, Showtime : {movies[key]['Showtime']}, Tickets sold : {movies[key]['Tickets sold']}\n"
+    output = ["\n\n***Movie Details***\n\n"]
+    for movie, details in movies.items():
+        output.append(f"\nMovie: {movie}\n")
+        for key, value in details.items():
+            output.append(f"\t{key}: {value}")
+        
+    msgbox("\n".join(output))
+    return True
 
-        out_string += temp
-    
-    msgbox(out_string)
+
 
 def search():
     choices = []
     for i in movies:
         choices.append(i)
     selection = choicebox("Select a movie to see details: ", "Search Movies", choices)
+    if not selection:
+        return True
     
-    genre = movies[selection]['Genre']
-    duration = movies[selection]['Duration']
-    showtime = movies[selection]['Showtime']
-    tickets_sold = movies[selection]['Tickets sold']
-
-    msg = ("Genre : ", genre, "\n", "Duration : ", duration, "\n", "Showtime : ", showtime, "\n", "Tickets sold : ", tickets_sold)
+    details = movies[selection]
+    output = [f"\n\n***Movie Details***\n\n{selection}\n"]
+    for key, value in details.items():
+        output.append(f"\t{key}: {value}")
+    msg = ("\n".join(output))
 
     msgbox(msg, "Search Movies")
+    return True
 
 def add_movies():
-    movie = enterbox("What movie do you want to add? : ")
+    movie = enterbox("What movie do you wish to add?")
     if movie in movies:
-        sure = buttonbox("Movie already being shown - do you want to change details?", "Movie Theatre", choices = ("Yes", "No"))
-        if sure == "No":
+        sure = buttonbox(f"{movie} is already scheduled to show. Do you wish to change the details?", "Movie already showing", choices = ("Yes", "No"))
+        if sure == "Yes":
+            edit()
             return True
+<<<<<<< HEAD
     msg = "Please fill out movie details below: "
     title = "Movie Theatre"
     field_names = ["Genre : ", "Duration(minutes) : ", "Showtime : ", "Tickets sold : "]
@@ -89,11 +96,112 @@ def add_movies():
             movies[movie] = temp
             
     return True
+=======
+        else:
+            msgbox("Nothing changed", "Movie Theatre")
+    else:
+        running = True
+        input_list = ["Genre", "Duration", "Showtime ( 24 hour time, EG 900 for 9 am or 1500 or 3pm", "Tickets sold(150 max)"]
+        while running:
+            user_in = multenterbox("Enter movie details", "Movie details", input_list)
+            running = False
+            if not user_in:
+                msgbox("Enter something", "Error")
+                user_in = []
+                running = True
+
+            elif "" in user_in:
+                msgbox("Enter something", "Error")
+                user_in = []
+                running = True
+            
+            elif not user_in[3].isdigit() or not user_in[2].isdigit() or not user_in[1].isdigit():
+                msgbox("Enter number for 2, 3, 4", "Error")
+                user_in = []
+                running = True
+
+            elif int(user_in[3]) > 150 or int(user_in[3]) < 0:
+                msgbox("Enter number between 0 and 150 for tickets sold", "Error")
+                user_in = []
+                running = True
+
+            elif int(user_in[1]) <= 0:
+                msgbox("Enter a time above 0 for tickets sold", "Error")
+                user_in = []
+                running = True
+            
+            elif int(user_in[2]) > 2400 or int(user_in[2]) < 0:
+                msgbox("Enter number between 0 and 2400 for time", "Error")
+                user_in = []
+                running = True
+
+
+        temp = {
+                "Genre": user_in[0],
+                "Duration": int(user_in[1]),
+                "Showtime": int(user_in[2]),
+                "Tickets sold": int(user_in[3])
+            }
+
+        movies[movie] = temp
+
+        print_dict()
+        return True
+>>>>>>> cd8ead5b6267e11d3d0f4ef575b28c0ff22d07b9
 
 
 
 def edit():
-    pass
+    movie = choicebox("What movie do you wish to edit?", "Edit details", movies)
+    if not movie:
+        return True
+
+    running = True
+    while running:
+        change = buttonbox("What part of the movie do you wish to change?", "Edit details", choices = ("Genre", "Duration", "Showtime", "Tickets sold", "Nothing, I'm done editing movies"))
+        if change == "Nothing, I'm done editing movies":
+            output = [f"\n\n***Movie Details***\n\n{movie}\n"]
+            for key, value in movies[movie].items():
+                output.append(f"\t{key}: {value}")
+            msg = ("\n".join(output))
+
+            msgbox(msg, "Search Movies")
+            return True
+        elif not change:
+            return True
+        else:
+            running1 = True
+            while running1:
+                temp = enterbox(f"Enter the new details for {change}", "Update details")
+                running1 = False
+                
+                if not temp:
+                    return True
+
+                if change != "Genre" and not temp.isdigit():
+                    msgbox("Enter a number", "Error")
+                    running1 = True
+                
+                if change == "Tickets sold" and int(temp) < 0 or change == "Tickets sold" and int(temp) > 150:
+                    running1 = True         
+
+
+            movies[movie][change] = temp
+            
+def tickets_sold():
+    movie = choicebox("What movie do you want to sell more tickets for", "Change tickets sold", movies)
+    if not movie:
+        return True
+    max_tickets = 150 - movies[movie]["Tickets sold"]
+    new_time = integerbox(f"Enter how many more tickets have been sold - max tickets per cinema is 150 - the previous amount, which is {max_tickets}", "Change time", lowerbound = 1, upperbound = max_tickets)
+    movies[movie]["Showtime"] = new_time
+
+    output = [f"\n\n***Movie Details***\n\n{movie}\n"]
+    for key, value in movies[movie].items():
+        output.append(f"\t{key}: {value}")
+        msg = ("\n".join(output))
+    msgbox(output, "Tickets sold")
+    return True
 
 # Main program
 menu()
